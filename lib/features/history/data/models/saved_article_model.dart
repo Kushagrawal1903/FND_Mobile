@@ -22,7 +22,7 @@ class SavedArticle {
       url: json['url'] ?? '',
       verdict: json['verdict'] ?? 'unverified',
       notes: json['notes'] ?? '',
-      savedAt: DateTime.tryParse(json['savedAt'] ?? '') ?? DateTime.now(),
+      savedAt: DateTime.tryParse(json['createdAt'] ?? json['savedAt'] ?? '') ?? DateTime.now(),
     );
   }
 

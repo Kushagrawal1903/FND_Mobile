@@ -17,13 +17,18 @@ class VerifyRepository {
     return VerificationResult.fromJson(data);
   }
 
-  Future<VerificationResult> analyzeClaim(String claim) async {
-    final data = await _remoteDataSource.analyzeClaim(claim);
+  Future<VerificationResult> analyzeClaim(String newsText) async {
+    final data = await _remoteDataSource.analyzeClaim(newsText);
     return VerificationResult.fromJson(data);
   }
 
   Future<VerificationResult> checkUrl(String url) async {
     final data = await _remoteDataSource.checkUrl(url);
+    return VerificationResult.fromJson(data);
+  }
+
+  Future<VerificationResult> getFactCheck(String id) async {
+    final data = await _remoteDataSource.getFactCheck(id);
     return VerificationResult.fromJson(data);
   }
 }

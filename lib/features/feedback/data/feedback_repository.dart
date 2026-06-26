@@ -36,10 +36,9 @@ class FeedbackRepository {
     }
   }
 
-  Future<FeedbackReport> submitFeedback(String type, String url, String description) async {
+  Future<FeedbackReport> submitFeedback(String title, String description) async {
     final data = await _remoteDataSource.submitFeedback({
-      'type': type,
-      'url': url,
+      'title': title,
       'description': description,
     });
     return FeedbackReport.fromJson(data);

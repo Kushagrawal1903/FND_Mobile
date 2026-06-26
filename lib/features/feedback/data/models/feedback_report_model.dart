@@ -1,15 +1,17 @@
 class FeedbackReport {
   final String id;
-  final String type;
-  final String url;
+  final String title;
+  final String? type;
+  final String? url;
   final String description;
   final String status;
   final DateTime createdAt;
 
   FeedbackReport({
     required this.id,
-    required this.type,
-    required this.url,
+    required this.title,
+    this.type,
+    this.url,
     required this.description,
     required this.status,
     required this.createdAt,
@@ -18,8 +20,9 @@ class FeedbackReport {
   factory FeedbackReport.fromJson(Map<String, dynamic> json) {
     return FeedbackReport(
       id: json['_id'] ?? '',
-      type: json['type'] ?? 'general',
-      url: json['url'] ?? '',
+      title: json['title'] ?? json['type'] ?? 'Feedback Report',
+      type: json['type'],
+      url: json['url'],
       description: json['description'] ?? '',
       status: json['status'] ?? 'pending',
       createdAt: DateTime.tryParse(json['createdAt'] ?? '') ?? DateTime.now(),
@@ -29,6 +32,7 @@ class FeedbackReport {
   Map<String, dynamic> toJson() {
     return {
       '_id': id,
+      'title': title,
       'type': type,
       'url': url,
       'description': description,

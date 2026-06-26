@@ -62,13 +62,18 @@ class VerifyNotifier extends StateNotifier<VerifyState> {
     }
   }
 
-  Future<void> deepAnalyze(String claim) async {
+  Future<void> deepAnalyze(String newsText) async {
     state = state.copyWith(isLoading: true, clearError: true, clearResult: true);
     try {
-      final result = await _repository.analyzeClaim(claim);
+      final result = await _repository.analyzeClaim(newsText);
       state = state.copyWith(isLoading: false, result: result);
     } catch (e) {
       state = state.copyWith(isLoading: false, error: e.toString());
     }
   }
 }
+
+final reportProvider = FutureProvider.family<VerificationResult, String>((ref, id) async {
+  final repository = ref.watch(verifyRepositoryProvider);
+  return repository.getFactCheck(id);
+});

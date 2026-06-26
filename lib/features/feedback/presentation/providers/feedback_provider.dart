@@ -47,9 +47,9 @@ class FeedbackNotifier extends StateNotifier<FeedbackState> {
     }
   }
 
-  Future<void> submitReport(String type, String url, String description) async {
+  Future<void> submitReport(String title, String description) async {
     try {
-      final newReport = await _repository.submitFeedback(type, url, description);
+      final newReport = await _repository.submitFeedback(title, description);
       state = state.copyWith(reports: [newReport, ...state.reports]);
     } catch (e) {
       state = state.copyWith(error: e.toString());
